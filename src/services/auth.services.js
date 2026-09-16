@@ -1,0 +1,47 @@
+import { getUserByEmail, getUserByUsername } from "./user.services.js";
+import { constructorError } from "../utils/constructorError.js";
+import { User } from "../models/user.model.js";
+import bcrypt from "bcryptjs";
+
+export const getUserByUsernameOrEmailService = async (identificador) => {
+    return await User.findOne({
+        $or: [
+            { email: identificador },
+            { username: identificador }
+        ]
+    }).select("+password");
+}
+
+
+export const createUserService = async (data) => {
+    
+    const email = data.email;
+    
+    const userPorEmail = await getUserByEmail(email);
+
+    if(userPorEmail){
+       throw constructorError(
+            "El usuario ya está registrado",
+            409
+        );
+    }
+    
+    const userPorUsername = await getUserByUsername(data.username);
+
+    if (userPorUsername) {
+        throw constructorError(
+            "El usuario ya está registrado",
+            409
+        );
+    }
+    
+    
+    const passwordHash = await bcrypt.hash(data.password, 10);
+
+    const user = await User.create({
+        ...data,
+        password: passwordHash
+    });
+    
+    return user;
+}
