@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { deleteUserController, createUserController, updateUserController, replaceUserController} from "../../controllers/user.controller.js";
+import { authMiddleware } from "../../middlewares/auth.middleware.js";
 
 const userRoutes = Router()
+
+userRoutes.use(authMiddleware);
 
 userRoutes.post("/", createUserController);
 userRoutes.put("/:id", replaceUserController);

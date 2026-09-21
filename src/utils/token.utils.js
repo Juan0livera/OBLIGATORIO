@@ -4,7 +4,6 @@
 import jwt from "jsonwebtoken";
 
 
-console.log("ACCESS_TOKEN_SECRET:", process.env.ACCESS_TOKEN_SECRET);
 
 const baseOptions = {
     algorithm: "HS256",//algoritmo de firma

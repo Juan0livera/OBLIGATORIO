@@ -2,6 +2,7 @@ import express from 'express';
 import "dotenv/config";
 import { connectMongo } from './src/config/mongo.config.js';
 import authRoutes from './src/routes/v1/v1.auth.routes.js'
+import categoryRoutes from "./src/routes/v1/v1.category.routes.js";
 import apiRoutes from './src/routes/v1/index.js';
 import { middlewareErrores } from './src/middlewares/error.middleware.js';
 
@@ -14,6 +15,7 @@ app.use(express.json());
 // app.use("/api/v1/auth", authRoutes);
 app.use("/api", apiRoutes)
 app.use(middlewareErrores);
+
 await connectMongo();
 
 

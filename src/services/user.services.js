@@ -26,3 +26,16 @@ export const deleteUserService = async (id) => {
     return await User.findByIdAndDelete(id);
 };
 
+
+export const replaceUserService = async (id, data) => {
+
+    return await User.findOneAndReplace(
+        { _id: id },
+        data,
+        {
+            new: true,
+            runValidators: true
+        }
+    ).select("-password");
+
+};

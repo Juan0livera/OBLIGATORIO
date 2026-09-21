@@ -6,6 +6,6 @@ const authRoutes = express.Router();
 
 
 authRoutes.post("/login", middlewareValidateLoginBody, login)
-authRoutes.post("/register", middlewareValidateRegisterBody ,register); // falta middelware 
+authRoutes.post("/register", middlewareValidateRegisterBody ,register); 
 
 export default authRoutes;

@@ -39,7 +39,10 @@ const userSchema = new mongoose.Schema({
 userSchema.set('toJSON', {
     transform : (doc, ret) => {
         delete ret.password;
-
+        // renombramos el id para quitar _
+        ret.id = ret._id
+        // y lo borramos
+        delete ret._id;
 
         return ret;
     }

@@ -6,28 +6,27 @@ import bcrypt from "bcryptjs";
 
 
 export const register = async (req, res, next) => {
-  try{
-    const data = req.body;
+  try {
+        const data = req.body;
 
-    const user = await createUserService(data);
+        const user = await createUserService(data);
 
-    const userData = {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        age: user.age,
-        role: user.role,
-        plan: user.plan
-    }
+        const userData = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            age: user.age,
+            role: user.role,
+            plan: user.plan
+        }
 
-    return res.status(201).json({
-        user : userData
-    });
-    
-  } catch(error) {
-        next(error);
-  }
-
+        return res.status(201).json({
+            user : userData
+        });
+        
+        } catch(error) {
+            next(error);
+        }
 }
 
 

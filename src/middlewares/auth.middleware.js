@@ -8,27 +8,37 @@ export const middlewareValidateLoginBody = validateRequired(loginBodySchema, "bo
 export const middlewareValidateRegisterBody = validateRequired(registerBodySchema, "body")
 
 
-export const authMiddleware = (req, res , next) => {
+export const authMiddleware = (req, res, next) => {
     try {
 
-        const authHeder = req.headers.authorization;   
-        if(!authHeder) {
-            return res.status(401).json({error : "no se recibio token"});
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader) {
+            return res.status(401).json({
+                error: "No se recibió token"
+            });
         }
 
-        // Sacar el bearer
-        if(!authHeder?.startsWith("Bearer ")){
-            return res.status(401).json({error: "Token no proporcionado"});
+        if (!authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({
+                error: "Token no proporcionado"
+            });
         }
 
-        const token = authHeder.split("")[1];
+        const token = authHeader.split(" ")[1];
 
         const decoded = verifyAccessToken(token);
 
         req.user = decoded;
 
         next();
+
     } catch (error) {
-        return res.status(401).json({ error: "invalid token"});
+
+        console.log("ERROR TOKEN:", error.message);
+
+        return res.status(401).json({
+            error: "invalid token"
+        });
     }
-}
+};
