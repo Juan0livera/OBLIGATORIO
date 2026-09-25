@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Roles, Role } from "../constants/constants.role.js";
 
 
 
@@ -21,12 +22,12 @@ const userSchema = new mongoose.Schema({
         select : false,
     },
     age : {
-        age : Number,
+        type : Number,
     },
     role : {
         type: String,
-        enum : ["User", "Admin"],
-        default : "User"
+        enum : Roles,
+        default : Role.user
     },
     plan : {
         type: String,
@@ -39,11 +40,9 @@ const userSchema = new mongoose.Schema({
 userSchema.set('toJSON', {
     transform : (doc, ret) => {
         delete ret.password;
-        // renombramos el id para quitar _
         ret.id = ret._id
-        // y lo borramos
         delete ret._id;
-
+        delete ret.__v;
         return ret;
     }
 });

@@ -6,7 +6,7 @@ export const getUsersService = async () => {
     return await User.find();
 };
 
-export const getUserById = async (id) => {
+export const getUserByIdService = async (id) => {
     return await User.findById(id).select("-password");//esconde el password o con + lo muestra si en el esquema está oculto
 };
 

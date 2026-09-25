@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { Roles } from "../constants/constants.role.js";
 
 // no validamos los campos como plan o role porque se asignan por defecto.
 export const registerBodySchema = Joi.object({
@@ -17,3 +18,8 @@ export const loginBodySchema = Joi.object({
     ).required(),
     password : Joi.string().min(8).required()
 });
+
+
+export const roleSchema = Joi.object({
+    role: Joi.string().valid(...Roles).required()
+})

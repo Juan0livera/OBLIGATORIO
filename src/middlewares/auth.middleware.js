@@ -1,11 +1,11 @@
 import { validateRequired } from "./validate.middleware.js";
-import  { loginBodySchema, registerBodySchema } from "../schemas/auth.schemas.js"
+import  { loginBodySchema, registerBodySchema, roleSchema } from "../schemas/auth.schemas.js"
 import { verifyAccessToken } from "../utils/token.utils.js";
 
 
 export const middlewareValidateLoginBody = validateRequired(loginBodySchema, "body");
-
 export const middlewareValidateRegisterBody = validateRequired(registerBodySchema, "body")
+export const validateRolesMiddleware = validateRequired(roleSchema, "body")
 
 
 export const authMiddleware = (req, res, next) => {

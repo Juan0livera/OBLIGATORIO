@@ -12,7 +12,18 @@ const baseOptions = {
 };
 
 
-//token comunes 
+
+export const generateAccessTokenByUser = (user) => {
+            const userToken = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            age: user.age,
+            role: user.role,
+            plan: user.plan
+        }
+    return generateAccessToken(userToken);
+}
 
 export const generateAccessToken = (data) => {
     return jwt.sign(
