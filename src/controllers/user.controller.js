@@ -1,4 +1,4 @@
-import {  deleteUserService, getUsersService, updateUserService, replaceUserService } from "../services/user.services.js";
+import {  deleteUserService, getUsersService, updateUserService, replaceUserService, upgradeUserPlanService } from "../services/user.services.js";
 import { createUserService } from "../services/auth.services.js";
 
 export const createUserController = async (req, res) => {
@@ -44,4 +44,13 @@ export const replaceUserController = async (req, res) => {
 
 
 
+export const upgradeUserPlanController = async (req, res) => {
+    const userId = req.user.id
 
+    const user = await upgradeUserPlanService(userId);
+
+    return res.status(200).json({
+        message: "Plan actualizado a premium",
+        user
+    })
+}

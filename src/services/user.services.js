@@ -1,4 +1,5 @@
 import { User } from '../models/user.model.js'
+import { constructorError } from '../utils/constructorError.js';
 
 
 
@@ -39,3 +40,23 @@ export const replaceUserService = async (id, data) => {
     ).select("-password");
 
 };
+
+
+
+export const upgradeUserPlanService = async (id) => {
+    const user = await getUserByIdService(id);
+
+    if(!user){
+        throw constructorError ("No se ha encontrado usuario", 404)
+    }
+
+    if(user.plan === "premium"){
+        throw constructorError ("El usuario ya tiene plan premium", 409);
+    }
+
+    user.plan = "premium";
+
+    await user.save();
+
+    return user
+}
