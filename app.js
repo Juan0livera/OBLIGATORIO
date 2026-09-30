@@ -12,7 +12,7 @@ const port = 5000;
 
 app.use(express.json());
 
-app.use("/", (req,res)=> {
+app.get("/", (req,res)=> {
     res.status(200).json({message : "Servidor disponible"});
 })
 
