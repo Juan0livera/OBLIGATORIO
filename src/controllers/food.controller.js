@@ -16,8 +16,28 @@ export const createFoodController = async (req, res, next) => {
 
 
 export const getAllFoodsController = async (req,res, next) =>{
-    const foods = await getAllFoodsService();
-    return res.status(200).json(foods);
+    
+    const {
+        name,
+        category,
+        minCalories,
+        maxCalories,
+        page = 1,
+        limit = 10
+    } = req.query;
+
+
+    const resultado = await getAllFoodsService({
+        name,
+        category,
+        minCalories,
+        maxCalories,
+        page,
+        limit
+    });
+
+
+    return res.status(200).json(resultado);
 }
 
 export const getFoodByIdController = async (req, res, next) => {

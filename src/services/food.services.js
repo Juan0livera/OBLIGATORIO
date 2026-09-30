@@ -41,11 +41,65 @@ export const createFoodService = async (data, userId) => {
     return food;
 }
 
-export const getAllFoodsService = async () => {
+export const getAllFoodsService = async ({name, category, minCalories, maxCalories, page = 1, limit = 10}) => {
 
-    return await Food.find()
-        .populate("category")
-        .populate("createdBy", "-password");
+
+    const filtros = {};
+
+    if(name){
+        filtros.name = {
+            $regex: name,
+            $options: "i"
+        };
+    }
+
+
+    if(category){
+        filtros.category = category;
+    }
+
+    if(minCalories || maxCalories){
+        filtros.calories = {};
+
+        if (minCalories !== undefined) {
+            filtros.calories.$gte = Number(minCalories);
+        }
+
+        if (maxCalories !== undefined) {
+            filtros.calories.$lte = Number(maxCalories);
+        }
+    }
+
+    if (maxCalories) {
+        filtros.calories.$lte = Number(maxCalories);
+    }
+
+    const pageNumber = Number(page);
+    const limitNumber = Number(limit);
+
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const foods = await Food.find(filtros)
+        .populate("category", "name description")
+        .populate("createdBy", "username email")
+        .skip(skip)
+        .limit(limitNumber);
+    const total = await Food.countDocuments(filtros);
+
+
+    return {
+        foods,
+        pagination: {
+            total,
+            page: pageNumber,
+            limit: limitNumber,
+            totalPages: Math.ceil(total / limitNumber)
+        }
+    }
+
+    // return await Food.find()
+    //     .populate("category")
+    //     .populate("createdBy", "-password");
 
 };
 
