@@ -16,11 +16,24 @@ app.use("/", (req,res)=> {
     res.status(200).json({message : "Servidor disponible"});
 })
 
+app.use(
+    "/api",
 
-app.use("/api", apiRoutes)
+    async (req, res, next) => {
+        try {
+            await connectMongo();
+        } catch(error){
+            next(error);
+        }
+    },
+
+    apiRoutes
+)
+
+// app.use("/api", apiRoutes)
 app.use(middlewareErrores);
 
-await connectMongo();
+//await connectMongo();
 
 
 app.listen(port, () => {
