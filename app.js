@@ -11,8 +11,12 @@ const app = express();
 const port = 5000;
 
 app.use(express.json());
-//app.use(routerUsuarios); --> para usar los controladores.
-// app.use("/api/v1/auth", authRoutes);
+
+app.use("/", (req,res)=> {
+    res.status(200).json({message : "Servidor disponible"});
+})
+
+
 app.use("/api", apiRoutes)
 app.use(middlewareErrores);
 
