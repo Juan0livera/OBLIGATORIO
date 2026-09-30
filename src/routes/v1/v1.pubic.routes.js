@@ -1,10 +1,9 @@
-import { Router } from "express";
-import { obtenerUsuariosExternosController } from "../../controllers/api-externas.controller.js";
+import express from "express";
+import { getRecipesByIngredientController } from "../../controllers/api-externas.controller.js";
 
-const publicRoutes = Router();
+const publicRoutes = express.Router();
 
-
-publicRoutes.get("/user-externos", obtenerUsuariosExternosController);
+publicRoutes.get( "/recipes", getRecipesByIngredientController);
 
 
 export default publicRoutes;

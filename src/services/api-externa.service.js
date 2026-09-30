@@ -1,18 +1,26 @@
 import axios from "axios";
 
-const urlExternaBase = "https://jsonplaceholder.typicode.com";
-
-const apiExternas = axios.create({
-    baseURL: urlExternaBase,
+const apiExterna = axios.create({
+    baseURL: "https://www.themealdb.com/api/json/v1/1",
     headers: {
         "Content-Type": "application/json"
     }
 });
 
 
-export const getUsuariosExternosService = async () => {
+export const getRecipesByIngredientService = async (ingredient) => {
 
-    const response = await apiExternas.get("/users");
+    const response = await apiExterna.get("/filter.php", {
+        params: {
+            i: ingredient
+        }
+    });
 
-    return response.data;
+     const meals = response.data.meals || [];
+
+    return meals.map(meal => ({
+        id: meal.idMeal,
+        name: meal.strMeal,
+        image: meal.strMealThumb
+    }));
 };
