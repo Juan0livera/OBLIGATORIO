@@ -1,3 +1,4 @@
+import { mongoose } from 'mongoose';
 import { Category } from '../models/categories.model.js';
 import { constructorError } from '../utils/constructorError.js';
 
@@ -45,6 +46,13 @@ export const getAllCategoriesService = async () => {
 // r
 export const getCategoryByIdService = async (id)=> {
     const category = await Category.findById(id);
+
+    if(mongoose.isValidObjectId(id)){
+        throw constructorError(
+            "El id de categoria no es válido",
+            400
+        )
+    }
 
     if (!category) {
         throw constructorError(
