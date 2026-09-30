@@ -45,7 +45,7 @@ export const getAllCategoriesService = async () => {
 
 // r
 export const getCategoryByIdService = async (id)=> {
-    const category = await Category.findById(id);
+ 
 
     if(mongoose.isValidObjectId(id)){
         throw constructorError(
@@ -53,6 +53,8 @@ export const getCategoryByIdService = async (id)=> {
             400
         )
     }
+
+    const category = await Category.findById(id);
 
     if (!category) {
         throw constructorError(
