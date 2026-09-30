@@ -47,7 +47,7 @@ export const getAllCategoriesService = async () => {
 export const getCategoryByIdService = async (id)=> {
  
 
-    if(mongoose.isValidObjectId(id)){
+    if(!mongoose.isValidObjectId(id)){
         throw constructorError(
             "El id de categoria no es válido",
             400
