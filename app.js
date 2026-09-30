@@ -23,6 +23,7 @@ app.use(
     async (req, res, next) => {
         try {
             await connectMongo();
+            next();
         } catch(error){
             next(error);
         }
