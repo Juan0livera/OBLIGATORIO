@@ -5,6 +5,7 @@ import authRoutes from './src/routes/v1/v1.auth.routes.js'
 import categoryRoutes from "./src/routes/v1/v1.category.routes.js";
 import apiRoutes from './src/routes/v1/index.js';
 import { middlewareErrores } from './src/middlewares/error.middleware.js';
+import aiRoutes from './src/routes/v1/v1.ai.routes.js';
 
 
 const app = express();
