@@ -2,6 +2,7 @@ import { Category } from "../models/categories.model.js";
 import { constructorError } from "../utils/constructorError.js";
 import { Food } from "../models/food.model.js"
 import { getUserByIdService } from "./user.services.js";
+import { mongoose } from "mongoose";
 
 export const createFoodService = async (data, userId) => {
     const category = await Category.findById(data.category);
