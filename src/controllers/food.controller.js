@@ -58,5 +58,5 @@ export const updateFoodController = async (req, res, next) =>{
 export const deleteFoodController = async (req,res,next) =>{
     const {id} = req.params;
     await deleteFoodService(id);
-    return res.status(200).send();
+    return res.status(204).send();
 }
