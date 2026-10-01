@@ -155,6 +155,7 @@ export const updateFoodService = async (id, data) => {
 
 
 export const deleteFoodService = async (id) => {
+    
 
     const food = await Food.findByIdAndDelete(id);
 

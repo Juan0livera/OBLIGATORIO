@@ -30,7 +30,36 @@ export const updateCategoryService = async (id, data) => {
 
 // d
 export const deleteCategoryService = async (id) => {
-    return await Category.findByIdAndDelete(id);
+    if (!mongoose.isValidObjectId(id)) {
+        throw constructorError(
+            "El id de categoria no es válido",
+            400
+        );
+    }
+
+    const category = await Category.findById(id);
+
+    if (!category) {
+        throw constructorError(
+            "Categoría no encontrada",
+            404
+        );
+    }
+
+    const foodAssociated = await Food.findOne({
+        category: id
+    });
+
+    if (foodAssociated) {
+        throw constructorError(
+            "No se puede eliminar la categoría porque tiene alimentos asociados",
+            409
+        );
+    }
+
+    await Category.findByIdAndDelete(id);
+
+    return category;
 }
 
 // r
