@@ -1,7 +1,7 @@
 import { mongoose } from 'mongoose';
 import { Category } from '../models/categories.model.js';
 import { constructorError } from '../utils/constructorError.js';
-
+import { Food } from '../models/food.model.js'
 
 // c
 export const createCategoryService = async(data) => {
