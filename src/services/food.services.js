@@ -105,6 +105,15 @@ export const getAllFoodsService = async ({name, category, minCalories, maxCalori
 
 
 export const getFoodByIdService = async (id) => {
+    
+    
+    if (!mongoose.isValidObjectId(id)) {
+        throw constructorError(
+            "El id de alimento no es válido",
+            400
+        );
+    }
+
 
     const food = await Food.findById(id)
         .populate("category");
