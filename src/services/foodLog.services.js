@@ -10,27 +10,26 @@ import { FoodLog } from "../models/foodLog.model.js";
 
 export const createFoodLogService =  async (data, userId) =>{
 
-    const foodToLog = await getFoodByIdService(data.food);
+    const food = await Food.findOne({
+        name: data.foodName
+    });
 
-    if (!foodToLog){
+    if (!food) {
         throw constructorError(
-            "Comida no encontrada", 
+            "Comida no encontrada",
             404
-        )
+        );
     }
-
 
     const foodLog = await FoodLog.create({
         user : userId,
         food : data.food,
         meal : data.meal,
+        quantity : data.quantity,
         consumedAt : data.consumedAt
     })
 
-
-
     return foodLog;
-
     
 }
 

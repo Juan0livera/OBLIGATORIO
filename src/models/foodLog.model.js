@@ -21,6 +21,12 @@ const foodLogSchema = new mongoose.Schema(
             required : false,
         },
 
+        quantity: {
+            type: Number,
+            required: true,
+            min: 1
+        },
+
         consumedAt : {
             type: Date,  
             default: Date.now 
