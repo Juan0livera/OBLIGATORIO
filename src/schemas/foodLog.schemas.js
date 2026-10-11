@@ -4,7 +4,7 @@ import Joi from "joi";
 
 export const createFoodLogBodySchema = Joi.object({
 
-    food : Joi.string().hex().length(24).required(),
+    foodName: Joi.string().trim().required(),
 
     meal : Joi.string().optional(),
 
