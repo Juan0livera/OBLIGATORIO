@@ -3,12 +3,7 @@ import { getFoodByIdService } from  "../services/food.services.js"
 import { constructorError } from "../utils/constructorError.js";
 import { FoodLog } from "../models/foodLog.model.js";
 
-
-
-
-
-
-export const createFoodLogService =  async (data, userId) =>{
+export const createFoodLogService = async (data, userId) => {
 
     const food = await Food.findOne({
         name: data.foodName
@@ -22,15 +17,14 @@ export const createFoodLogService =  async (data, userId) =>{
     }
 
     const foodLog = await FoodLog.create({
-        user : userId,
-        food : data.food,
-        meal : data.meal,
-        quantity : data.quantity,
-        consumedAt : data.consumedAt
-    })
+        user: userId,
+        food: food.id,
+        meal: data.meal,
+        quantity: data.quantity,
+        consumedAt: data.consumedAt
+    });
 
     return foodLog;
-    
-}
+};
 
 
