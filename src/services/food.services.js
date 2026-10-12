@@ -144,13 +144,7 @@ export const updateFoodService = async (id, data) => {
         }
     }
 
-    const food = await Food.findByIdAndUpdate(
-        id,
-        data,
-        {
-            new: true,
-            runValidators: true
-        }
+    const food = await Food.findByIdAndUpdate(id, data,{ new: true,runValidators: true}
     );
 
     if (!food) {
@@ -166,7 +160,6 @@ export const updateFoodService = async (id, data) => {
 
 export const deleteFoodService = async (id) => {
     
-
     const food = await Food.findByIdAndDelete(id);
 
     if (!food) {

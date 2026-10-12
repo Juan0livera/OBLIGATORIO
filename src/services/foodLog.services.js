@@ -37,6 +37,46 @@ export const getFoodLogByUserService = async (userId) => {
 }
 
 
-export const deleteFoodLogService = async ()
+export const deleteFoodLogService = async (id) => {
+    const foodLog = await FoodLog.findByIdAndDelete(id);
+
+
+    if(!foodLog){
+        throw constructorError(
+            "No existe el alimento que se quiere eliminar", 404
+        )
+    }
+
+    return foodLog;
+}
+
+
+export const updateFoodLogService = async (id, data) => {
+
+    if(data.Food) {
+
+        const food = await Food.findById(data.food);
+
+        if(!food){
+            throw constructorError(
+                "La comida no existe",
+                404
+            );
+        }
+    }
+
+
+    const foodLog = await Food.findByIdAndUpdate(id, data)
+
+    if(!foodLog){
+        throw constructorError(
+            "El registro de alimento no existe",
+            404
+        );
+    }
+
+    return foodLog;
+
+}
 
 
