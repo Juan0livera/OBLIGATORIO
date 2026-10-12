@@ -32,9 +32,12 @@ export const getFoodLogByUserService = async (userId) => {
     const foodLog = await FoodLog.findOne({
         user : userId
     }).populate(
+        "username"
+    )    
+    .populate(
         "food",
         "name calories protein carbs fat servingSize"
-    )
+    ).select(-"user");
 
     return foodLog;
 }
