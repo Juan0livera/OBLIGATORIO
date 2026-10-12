@@ -1,4 +1,4 @@
-import { createFoodLogService } from "../services/foodLog.services.js";
+import { createFoodLogService, getFoodLogByUserService } from "../services/foodLog.services.js";
 
 
 
@@ -15,7 +15,7 @@ export const createFoodLogController = async (req, res, next) => {
 export const getAllFoodLogByUserController = async ( req, res, next) => {
     const userId = req.user.id;
 
-    const foodLogs = await getFoodLogsByUserService(userId);
+    const foodLogs = await getFoodLogByUserService(userId);
 
     return res.status(200).json(foodLogs);
 }

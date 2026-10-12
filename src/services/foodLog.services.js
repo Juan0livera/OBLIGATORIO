@@ -37,3 +37,6 @@ export const getFoodLogByUserService = async (userId) => {
 }
 
 
+export const deleteFoodLogService = async ()
+
+
