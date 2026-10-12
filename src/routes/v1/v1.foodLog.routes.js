@@ -10,7 +10,7 @@ const foodLogRoutes = Router();
 foodLogRoutes.use(authMiddleware);
 foodLogRoutes.post("/", middlewareValidateBodyCreateFoodLog, createFoodLogController);
 foodLogRoutes.get("/", authMiddleware, getAllFoodLogByUserController);
-foodLogRoutes.delete("/id", deleteFoodController)
+foodLogRoutes.delete("/:id", deleteFoodController)
 
 
 export default foodLogRoutes;
