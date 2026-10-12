@@ -31,7 +31,10 @@ export const createFoodLogService = async (data, userId) => {
 export const getFoodLogByUserService = async (userId) => {
     const foodLog = await FoodLog.findOne({
         user : userId
-    })
+    }).populate(
+        "food",
+        "name calories protein carbs fat servingSize"
+    )
 
     return foodLog;
 }
