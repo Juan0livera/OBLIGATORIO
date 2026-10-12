@@ -28,3 +28,12 @@ export const createFoodLogService = async (data, userId) => {
 };
 
 
+export const getFoodLogByUserService = async (userId) => {
+    const foodLog = await FoodLog.findOne({
+        user : userId
+    })
+
+    return foodLog;
+}
+
+
