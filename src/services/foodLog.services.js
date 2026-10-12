@@ -29,7 +29,7 @@ export const createFoodLogService = async (data, userId) => {
 
 
 export const getFoodLogByUserService = async (userId) => {
-    const foodLog = await FoodLog.findOne({
+    const foodLog = await FoodLog.find({
         user : userId
     }).populate(
         "user",
