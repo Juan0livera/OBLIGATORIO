@@ -3,12 +3,23 @@ import "dotenv/config";
 import { connectMongo } from './src/config/mongo.config.js';
 import apiRoutes from './src/routes/v1/index.js';
 import { middlewareErrores } from './src/middlewares/error.middleware.js';
+import cors from "cors";
 
 
 const app = express();
 const port = 5000;
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://tu-frontend.vercel.app"
+];
+
+app.use(cors({
+    origin: allowedOrigins
+}));
 
 app.use(express.json());
+
+
 
 app.get("/", (req, res) => {
     res.status(200).json({
