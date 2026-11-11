@@ -3,7 +3,8 @@ import {
     getAllFoodsService,
     getFoodByIdService,
     updateFoodService,
-    deleteFoodService
+    deleteFoodService,
+    getFoodCountByUserService
 } from "../services/food.services.js";
 
 
@@ -60,3 +61,21 @@ export const deleteFoodController = async (req,res,next) =>{
     await deleteFoodService(id);
     return res.status(204).send();
 }
+
+
+export const getFoodCountByUserController = async (req, res, next) => {
+    try {
+
+        const cantidad =
+            await getFoodCountByUserService(
+                req.user.id
+            );
+
+        res.status(200).json({
+            cantidad
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};

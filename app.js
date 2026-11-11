@@ -8,7 +8,9 @@ import cors from "cors";
 
 const app = express();
 const port = 5000;
+// variable nos permite testear desde producion y base.
 const allowedOrigins = [
+    "http://localhost:5000",
     "http://localhost:5173",
     "https://tu-frontend.vercel.app"
 ];

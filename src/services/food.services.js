@@ -171,3 +171,12 @@ export const deleteFoodService = async (id) => {
 
     return food;
 };
+
+export const getFoodCountByUserService = async (userId) => {
+
+    const cantidad = await Food.countDocuments({
+        createdBy: userId
+    });
+
+    return cantidad;
+};
