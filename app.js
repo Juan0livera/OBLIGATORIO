@@ -12,7 +12,7 @@ const port = 5000;
 const allowedOrigins = [
     "http://localhost:5000",
     "http://localhost:5173",
-    "https://tu-frontend.vercel.app"
+    "https://potatoapp-five.vercel.app"
 ];
 
 app.use(cors({
