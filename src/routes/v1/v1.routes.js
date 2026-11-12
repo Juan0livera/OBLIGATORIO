@@ -6,6 +6,7 @@ import foodRoutes from "./v1.food.routes.js";
 import aiRoutes from "./v1.ai.routes.js";
 import publicRoutes from "./v1.pubic.routes.js";
 import foodLogRoutes from "./v1.foodLog.routes.js";
+import uploadImage from "./v1.uploadImage.routes.js"
 
 
 const v1Routes = Router()
@@ -17,6 +18,7 @@ v1Routes.use("/food", foodRoutes);
 v1Routes.use("/foodLog", foodLogRoutes);
 v1Routes.use("/ai", aiRoutes);
 v1Routes.use("/public", publicRoutes);
+v1Routes.use("/images/upload", uploadImage);
 
 
 export default v1Routes
