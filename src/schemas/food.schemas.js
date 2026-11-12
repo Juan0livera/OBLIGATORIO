@@ -14,7 +14,9 @@ export const createFoodBodySchema = Joi.object({
 
     servingSize: Joi.number().min(1).required(),
 
-    category: Joi.string().required()
+    category: Joi.string().required(),
+
+    image: Joi.string().uri().allow("").optional()
 });
 
 
